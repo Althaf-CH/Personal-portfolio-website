@@ -1,4 +1,30 @@
-// Scroll Reveal Animation
+console.log("JS is working");
+
+const container = document.getElementById("projects-container");
+
+fetch("https://personal-portfolio-website-35jw.onrender.com/projects")
+  .then(res => res.json())
+  .then(data => {
+    console.log("DATA:", data);
+
+    container.innerHTML = "";
+
+    data.forEach(project => {
+      const card = document.createElement("div");
+      card.classList.add("service-card");
+
+      card.innerHTML = `
+        <h3>${project.title}</h3>
+        <p>${project.technology}</p>
+      `;
+
+      container.appendChild(card);
+    });
+  })
+  .catch(err => {
+    console.log("ERROR:", err);
+  });
+  // Scroll Reveal Animation
 
 const revealElements = document.querySelectorAll(
     '.about, .service-card, .gallery-item, .contact-button-section'
@@ -165,25 +191,23 @@ if(topBtn){
     });
 
 }
-const projectList = document.getElementById("project-list");
+fetch("https://personal-portfolio-website-35jw.onrender.com/projects")
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById("projects-container");
 
-if(projectList){
+    data.forEach(project => {
+      const card = document.createElement("div");
+      card.classList.add("service-card");
 
-fetch("http://localhost:5000/projects")
-.then(response => response.json())
-.then(data => {
+      card.innerHTML = `
+        <h3>${project.title}</h3>
+        <p>${project.technology}</p>
+      `;
 
-data.forEach(project => {
-
-projectList.innerHTML += `
-<div class="service-card">
-<h3>${project.title}</h3>
-<p>${project.technology}</p>
-</div>
-`;
-
-});
-
-});
-
-}
+      container.appendChild(card);
+    });
+  })
+  .catch(error => {
+    console.log("Error loading projects:", error);
+  });
