@@ -13,7 +13,7 @@ if (container) {
 
       data.forEach(project => {
         const card = document.createElement("div");
-        card.classList.add("service-card");
+        card.classList.add("service-card", "active");
 
         card.innerHTML = `
           <h3>${project.title}</h3>
