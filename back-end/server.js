@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
@@ -32,16 +33,18 @@ const projects = [
   }
 ];
 
-app.get("/", (req, res) => {
-  res.send("Portfolio Backend Running");
+app.get("/api/projects", (req, res) => {
+  res.json(projects);
 });
 
-app.get("/projects", (req, res) => {
-  res.json(projects);
+app.use(express.static(path.join(__dirname, "../front-end")));
+
+app.get("/{*path}", (req, res) => {
+  res.sendFile(path.join(__dirname, "../front-end/index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });

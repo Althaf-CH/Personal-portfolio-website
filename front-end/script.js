@@ -4,7 +4,7 @@ console.log("JS is working");
 const container = document.getElementById("projects-container");
 
 if (container) {
-  fetch("https://personal-portfolio-website-35jw.onrender.com/projects")
+  fetch("/api/projects")
     .then(res => res.json())
     .then(data => {
       console.log("DATA:", data);
